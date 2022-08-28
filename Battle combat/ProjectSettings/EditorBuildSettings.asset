@@ -4,5 +4,11 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Buttle combat/Scenes/Start Menu.unity
+    guid: 83b5445f278a45d4c9fd2c272ce89012
+  - enabled: 1
+    path: Assets/Buttle combat/Scenes/Level1.unity
+    guid: 9fc0d4010bbf28b4594072e72b8655ab
   m_configObjects: {}
