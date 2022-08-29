@@ -2,8 +2,10 @@ using UnityEngine;
 
 public class ControllerPC : PlayerController
 {
-    public GameObject TestCube;
+    public GameObject MousePointPref;
+    public LayerMask LayerForSelect;
 
+    private GameObject MousePoint;
     private Ship _startShip;
     private Camera _camera;
 
@@ -15,15 +17,16 @@ public class ControllerPC : PlayerController
         if (groundPlane.Raycast(ray, out float position))
         {
             Vector3 worldPosition = ray.GetPoint(position);
-            TestCube.transform.position = new Vector3(worldPosition.x, worldPosition.y, worldPosition.z);
+            MousePoint.transform.position = new Vector3(worldPosition.x, worldPosition.y, worldPosition.z);
 
             if (Input.GetKeyDown(KeyCode.Mouse0)/* || Input.GetTouch(0).phase == TouchPhase.Began*/)
             {
                 RaycastHit hit;
-                if (Physics.Raycast(_camera.transform.position, ray.direction, out hit, Mathf.Infinity))
+                if (Physics.Raycast(_camera.transform.position, ray.direction, out hit, Mathf.Infinity, LayerForSelect))
                 {
                     Debug.DrawRay(_camera.transform.position, ray.direction * hit.distance, Color.yellow);
-                    if (hit.transform.gameObject.tag == "PlayerShip")
+                    var hitObject = hit.transform.gameObject;
+                    if (hitObject.GetComponent<Ship>()?.Role == Ship.ShipRole.Player)
                     {
                         _startShip = hit.transform.gameObject.GetComponent<Ship>();
                     }
@@ -31,7 +34,7 @@ public class ControllerPC : PlayerController
                     {
                         if(_startShip != null)
                         {
-                            _startShip.Move(TestCube.transform.position);
+                            _startShip.Move(MousePoint.transform.position);
                         }
                     }
                 }
@@ -46,6 +49,7 @@ public class ControllerPC : PlayerController
 
     private void Start()
     {
+        MousePoint = Instantiate(MousePointPref);
         _camera = GetComponent<Camera>();
     }
 

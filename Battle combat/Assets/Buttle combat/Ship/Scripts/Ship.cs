@@ -23,22 +23,71 @@ public abstract class Ship : MonoBehaviour
         }
     }
 
+    [Serializable]
+    public enum ShipRole
+    {
+        Player,
+        Enemy,
+        Neutral
+    }
 
-    //public float SpeedMove { get; set; }
-    //public float SpeedRotate { get; set; }
-    //public float HealthHull { get; set; }
-    //public float HealthShield { get; set; }
-    //public float ResistanceArmor { get; set; }
+    [Header("Роль корабля")]
+    [SerializeField] public ShipRole Role;
+    [Header("Характеристики корабля")]
+    [SerializeField] public ShipData shipData;
+
+    //public ShipRole MyRole { get; private set; }
+    //public ShipRole EnemyRole { get; private set; }
 
     private NavMeshAgent _agent;
+    private WeaponController _weaponController;
 
     public virtual void Init()
     {
         _agent = gameObject.AddComponent<NavMeshAgent>();
+        _weaponController = gameObject.GetComponent<WeaponController>();
+        _weaponController.ShipScript = this;
+        //ChooseRole(Role);
     }
 
     public virtual void Move(Vector3 newPos)
     {
         _agent.SetDestination(newPos);
     }
+
+    public bool IsEnemy(ShipRole myRole, ShipRole objectRole)
+    {
+        switch (myRole)
+        {
+            case ShipRole.Player:
+                if(objectRole == ShipRole.Enemy)
+                {
+                    return true;    
+                }
+                break;
+            case ShipRole.Enemy:
+                if (objectRole == ShipRole.Player)
+                {
+                    return true;
+                }
+                break;
+        }
+
+        return false;
+    }
+
+    //private void ChooseRole(ShipRole shipRole)
+    //{
+    //    switch (shipRole)
+    //    {
+    //        case ShipRole.Player:
+    //            MyRole = ShipRole.Player;
+    //            EnemyRole = ShipRole.Enemy;
+    //            break;
+    //        case ShipRole.Enemy:
+    //            MyRole = ShipRole.Enemy;
+    //            EnemyRole = ShipRole.Player;
+    //            break;
+    //    }
+    //}
 }
