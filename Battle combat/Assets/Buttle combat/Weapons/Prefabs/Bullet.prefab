@@ -108,6 +108,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5707bba7bb936834f9eb9ad4b997078d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AmmoInfo:
+    Damage: 1
+    Speed: 70
+    ExplosionRadius: 0
   Speed: 70
   ExplosionRadius: 0
   impactEffect: {fileID: 8519572873176758707, guid: c0a8ff98dc6499345a1e81fbcfe3e5e5, type: 3}

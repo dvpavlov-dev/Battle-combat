@@ -1,12 +1,13 @@
 using System.Collections.Generic;
 using UnityEngine;
+using ShipModule;
 
 public class WeaponController : MonoBehaviour
 {
     public GameObject PointsForTurrets;
     public List<GameObject> _turretsPref = new List<GameObject>();
 
-    [HideInInspector]public Ship ShipScript;
+    public Ship ShipScript { get; private set; }
     private List<GameObject> _turretPoints = new List<GameObject>();
 
     void Start()
@@ -19,8 +20,13 @@ public class WeaponController : MonoBehaviour
         foreach(GameObject turret in _turretPoints)
         {
             var turret1 = Instantiate(_turretsPref[1], turret.transform);
-            turret1.GetComponent<TurretScript>().WeaponController = this;
+            turret1.GetComponent<TurretScript>().SetLinkWeaponController(this);
         }
+    }
+
+    public void SetLinkShip(Ship shipScript)
+    {
+        ShipScript = shipScript;
     }
 
     private void AddPointsToList()

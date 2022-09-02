@@ -1,9 +1,13 @@
-using UnityEngine;
-
-public class StartShip : Ship
+namespace ShipModule
 {
-    void Start()
+    using UnityEngine;
+
+    public class StartShip : Ship
     {
-        Init();
+        void Start()
+        {
+            Init();
+        }
     }
 }
+
