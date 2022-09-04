@@ -37,11 +37,21 @@ namespace ControllerModule
                             {
                                 if(hitObject.GetComponent<Ship>().Role == Ship.ShipRole.Player)
                                 {
+                                    if(_startShipPlayer != null)
+                                    {
+                                        _startShipPlayer.TurnOnFrame(Ship.ShipRole.NoRole);
+                                    }
+                                    
                                     _startShipPlayer = hit.transform.gameObject.GetComponent<Ship>();
                                     _startShipPlayer.TurnOnFrame(_startShipPlayer.Role);
                                 }
                                 else if(hitObject.GetComponent<Ship>().Role == Ship.ShipRole.Enemy)
                                 {
+                                    if(_startShipEnemy != null)
+                                    {
+                                        _startShipEnemy.TurnOnFrame(Ship.ShipRole.NoRole);
+                                    }
+
                                     _startShipEnemy = hit.transform.gameObject.GetComponent<Ship>();
                                     _startShipEnemy.TurnOnFrame(_startShipEnemy.Role);
                                 }
@@ -50,13 +60,14 @@ namespace ControllerModule
                             {
                                 if(_startShipPlayer != null)
                                 {
-                                    _startShipPlayer?.TurnOnFrame(Ship.ShipRole.NoRole);
+                                    _startShipPlayer.TurnOnFrame(Ship.ShipRole.NoRole);
                                     _startShipPlayer = null;
                                 }                                
                                 
                                 if(_startShipEnemy != null)
                                 {
-                                    _startShipEnemy?.TurnOnFrame(Ship.ShipRole.NoRole);
+                                    _startShipEnemy.TurnOnFrame(Ship.ShipRole.NoRole);
+                                    _startShipEnemy = null;
                                 }
                             }
                         }
@@ -66,6 +77,11 @@ namespace ControllerModule
                             {
                                 if(hitObject.GetComponent<Ship>()?.Role == Ship.ShipRole.Enemy)
                                 {
+                                    if (_startShipEnemy != null)
+                                    {
+                                        _startShipEnemy.TurnOnFrame(Ship.ShipRole.NoRole);
+                                    }
+
                                     _startShipEnemy = hitObject.GetComponent<Ship>();
                                     _startShipEnemy.TurnOnFrame(_startShipEnemy.Role);
                                     _startShipPlayer.Attack(_startShipEnemy);

@@ -9,7 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8436025882019473315}
-  - component: {fileID: 4319716290401163268}
+  - component: {fileID: 8316203398444648721}
+  - component: {fileID: 3414641499969612921}
   m_Layer: 0
   m_Name: StandartTurret
   m_TagString: Untagged
@@ -33,7 +34,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4319716290401163268
+--- !u!114 &8316203398444648721
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -42,17 +43,32 @@ MonoBehaviour:
   m_GameObject: {fileID: 519398919192934074}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2bae1d8aeeed15d40ad744050fb98f94, type: 3}
+  m_Script: {fileID: 11500000, guid: 0660bb78930c5ae49a023d18bc4313c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Range: 50
-  TurnSpeed: 10
-  FireRate: 1
-  EnemyTag: Enemy
-  PartToRotateHorizontal: {fileID: 8863134341284600369}
-  PartToRotateVertical: {fileID: 0}
+  TurretInfo:
+    Range: 50
+    TurnSpeed: 100
+    FireRate: 1
   BulletPref: {fileID: 1062147373061378356, guid: 87a43edea0733764b9f15cd625544740, type: 3}
-  FirePoint: {fileID: 2885369270008806737}
+  MuzzleEffect: {fileID: 1876081050882714, guid: e5df5caad603c8349ba3481b8ded0927, type: 3}
+  FirePoint: {fileID: 494640230053916045}
+  PartToRotateHorizontal: {fileID: 8863134341284600369}
+  PartToRotateVertical: {fileID: 2124453973464193452}
+  otherShips: []
+--- !u!135 &3414641499969612921
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519398919192934074}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 50
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &769578693590014656
 GameObject:
   m_ObjectHideFlags: 0

@@ -280,6 +280,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a9cb74c38e897a419e9c31a9b4e3928, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ExplosionEffect: {fileID: 100000, guid: f881607407b15cc46b24d6bda799037a, type: 3}
   Role: 0
   AI: 0
   ShipInfo:
@@ -288,6 +289,7 @@ MonoBehaviour:
     HealthHull: 300
     HealthShield: 200
     ResistanceArmor: 2
+  PrimaryEnemy: {fileID: 0}
 --- !u!114 &4609596840922186460
 MonoBehaviour:
   m_ObjectHideFlags: 0

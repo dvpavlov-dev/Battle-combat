@@ -50,7 +50,7 @@ namespace ControllerModule
 
         void Update()
         {
-            if (!ShipScript.IsArrived())
+            if (!ShipScript.IsStillMoving())
             {
                 Position();
             }

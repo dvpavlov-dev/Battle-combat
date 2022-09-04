@@ -17,10 +17,12 @@ public class WeaponController : MonoBehaviour
             AddPointsToList();
         }
 
+        int i = 0;
         foreach(GameObject turret in _turretPoints)
         {
-            var turret1 = Instantiate(_turretsPref[1], turret.transform);
-            turret1.GetComponent<TurretScript>().SetLinkWeaponController(this);
+            var turret1 = Instantiate(_turretsPref[i], turret.transform);
+            i++;
+            turret1.GetComponent<Turret>().SetLinkWeaponController(this);
         }
     }
 

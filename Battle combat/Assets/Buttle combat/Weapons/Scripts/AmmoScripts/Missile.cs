@@ -5,38 +5,40 @@ public class Missile : Ammunition
 {
     private Transform _target;
 
-    //public float Speed = 70f;
-    //public float ExplosionRadius = 0f;
-    public GameObject impactEffect;
-
-    public void Seek(Transform target)
+    private void Update()
     {
-        _target = target;
-    }
-
-    void Update()
-    {
-        if(_target == null)
+        if(Target == null)
         {
             Destroy(gameObject);
             return;
         }
 
-        Vector3 dir = _target.position - transform.position;
-        float distanceThisFrame = AmmoInfo.Speed * Time.deltaTime;
-
-        if(dir.magnitude <= distanceThisFrame)
-        {
-            HitTarget();
-            return;
-        }
-
-        transform.Translate(dir.normalized * distanceThisFrame, Space.World);
-        transform.LookAt(_target);
+        MoveAmmo();
     }
 
+    public void Seek(Transform target)
+    {
+        Target = target;
+    }
 
-    void Explode()
+    public override void HitTarget(GameObject target)
+    {
+        GameObject effectIns = Instantiate(impactEffect, transform.position, transform.rotation);
+        Destroy(effectIns, 1f);
+
+        if (AmmoInfo.ExplosionRadius > 0f)
+        {
+            Explode();
+        }
+        else
+        {
+            Damage(target.transform);
+        }
+
+        Destroy(gameObject);
+    }
+
+    private void Explode()
     {
         Collider[] hitObjects = Physics.OverlapSphere(transform.position, AmmoInfo.ExplosionRadius);
         foreach(Collider hitObject in hitObjects)
@@ -48,10 +50,9 @@ public class Missile : Ammunition
         }
     }
 
-    void Damage(Transform enemy)
+    private void Damage(Transform enemy)
     {
         enemy.gameObject.GetComponent<Ship>().TakeDamage(AmmoInfo.Damage);
-        //Destroy(enemy.gameObject);
     }
 
     private void OnDrawGizmosSelected()
@@ -60,20 +61,18 @@ public class Missile : Ammunition
         Gizmos.DrawSphere(transform.position, AmmoInfo.ExplosionRadius);
     }
 
-    public override void HitTarget()
+    public override void MoveAmmo()
     {
-        GameObject effectIns = Instantiate(impactEffect, transform.position, transform.rotation);
-        Destroy(effectIns, 1f);
+        Vector3 dir = Target.position - transform.position;
+        float distanceThisFrame = AmmoInfo.Speed * Time.deltaTime;
 
-        if (AmmoInfo.ExplosionRadius > 0f)
+        if (dir.magnitude <= distanceThisFrame)
         {
-            Explode();
-        }
-        else
-        {
-            Damage(_target);
+            HitTarget(Target.gameObject);
+            return;
         }
 
-        Destroy(gameObject);
+        transform.Translate(dir.normalized * distanceThisFrame, Space.World);
+        transform.LookAt(Target);
     }
 }

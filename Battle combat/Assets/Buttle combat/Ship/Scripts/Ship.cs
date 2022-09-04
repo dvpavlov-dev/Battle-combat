@@ -7,6 +7,8 @@ namespace ShipModule
 
     public abstract class Ship : MonoBehaviour
     {
+        public GameObject ExplosionEffect;
+
         [Serializable]
         public struct ShipData
         {
@@ -41,6 +43,8 @@ namespace ShipModule
         [Header("Характеристики корабля")]
         [SerializeField] public ShipData ShipInfo;
 
+        [HideInInspector] public GameObject PrimaryEnemy;
+
         private NavMeshAgent _agent;
         private WeaponController _weaponController;
         private UIController _uIController;
@@ -70,6 +74,14 @@ namespace ShipModule
         public virtual void Attack(Ship targetShip)
         {
             Debug.Log($"Attack {targetShip.gameObject} ship");
+            PrimaryEnemy = targetShip.gameObject;
+        }
+
+        public virtual void Death()
+        {
+            var explosionEffect = Instantiate(ExplosionEffect, transform);
+            Destroy(explosionEffect, 1);
+            Destroy(this.gameObject, 1);
         }
 
         public bool IsEnemy(ShipRole myRole, ShipRole objectRole)
@@ -93,7 +105,7 @@ namespace ShipModule
             return false;
         }
 
-        public bool IsArrived()
+        public bool IsStillMoving()
         {
             return _agent.hasPath;
         }
@@ -105,14 +117,13 @@ namespace ShipModule
 
         public void TakeDamage(float damage)
         {
-            if(_currentHealthHull > 0)
+            _currentHealthHull = _currentHealthHull - damage;
+            _uIController.HealthScript.ReducingHealthStrip(ShipInfo.HealthHull, damage);
+
+            if (_currentHealthHull < 0)
             {
-                _currentHealthHull = _currentHealthHull - damage;
                 _uIController.HealthScript.ReducingHealthStrip(ShipInfo.HealthHull, damage);
-            }
-            else
-            {
-                Debug.Log($"Ship dead");
+                Death();
             }
         }
 
