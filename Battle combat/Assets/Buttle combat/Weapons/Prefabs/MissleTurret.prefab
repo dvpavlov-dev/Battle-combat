@@ -252,7 +252,7 @@ MonoBehaviour:
   TurretInfo:
     Range: 100
     TurnSpeed: 5
-    FireRate: 0.5
+    FireRate: 0.1
   BulletPref: {fileID: 9175538896826848999, guid: 342dbe8a6dfd66d47b934c80c57fca8b, type: 3}
   MuzzleEffect: {fileID: 1876081050882714, guid: e5df5caad603c8349ba3481b8ded0927, type: 3}
   FirePoint: {fileID: 2885369270008806737}

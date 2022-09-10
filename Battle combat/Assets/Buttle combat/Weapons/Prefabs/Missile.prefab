@@ -143,7 +143,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Target: {fileID: 0}
   AmmoInfo:
-    Damage: 200
+    Damage: 25
     Speed: 30
     ExplosionRadius: 30
   impactEffect: {fileID: 100006, guid: 10b506478f435cf4ca5bbcf982c59f08, type: 3}

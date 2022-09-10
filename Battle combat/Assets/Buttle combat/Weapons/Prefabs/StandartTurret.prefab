@@ -49,13 +49,13 @@ MonoBehaviour:
   TurretInfo:
     Range: 50
     TurnSpeed: 100
-    FireRate: 1
+    FireRate: 0.5
   BulletPref: {fileID: 1062147373061378356, guid: 87a43edea0733764b9f15cd625544740, type: 3}
   MuzzleEffect: {fileID: 1876081050882714, guid: e5df5caad603c8349ba3481b8ded0927, type: 3}
   FirePoint: {fileID: 494640230053916045}
   PartToRotateHorizontal: {fileID: 8863134341284600369}
   PartToRotateVertical: {fileID: 2124453973464193452}
-  otherShips: []
+  OtherShips: []
 --- !u!135 &3414641499969612921
 SphereCollider:
   m_ObjectHideFlags: 0
